@@ -1,0 +1,61 @@
+plugins {
+    id 'java'
+}
+
+java {
+    toolchain {
+        languageVersion = JavaLanguageVersion.of(21)
+    }
+}
+
+repositories {
+    mavenCentral()
+}
+
+configurations {
+    agent {
+        canBeResolved = true
+        canBeConsumed = false
+    }
+}
+
+tasks.withType(JavaCompile).configureEach {
+    options.encoding = 'UTF-8'
+    options.compilerArgs.add('-parameters')
+}
+
+dependencies {
+    agent "org.aspectj:aspectjweaver:1.9.22"
+    implementation 'io.qameta.allure:allure-java-commons:2.21.0'
+    implementation 'org.seleniumhq.selenium:selenium-java:4.15.0'
+    implementation 'org.junit.jupiter:junit-jupiter-api:5.9.2'
+    implementation 'org.junit.platform:junit-platform-engine:1.9.2'
+    implementation 'org.junit.platform:junit-platform-commons:1.9.2'
+    implementation group: 'com.browserstack', name: 'browserstack-local-java', version: '1.1.4'
+    implementation 'io.appium:java-client:9.0.0'
+    testImplementation "org.slf4j:slf4j-simple:2.0.12"
+    implementation 'commons-io:commons-io:2.15.1'
+    compileOnly 'org.projectlombok:lombok:1.18.24'
+    testImplementation 'org.junit.jupiter:junit-jupiter-engine:5.9.0'
+    testRuntimeOnly 'org.junit.jupiter:junit-jupiter-engine:5.9.0'
+    testImplementation 'com.google.inject:guice:7.0.0'
+    testImplementation "io.qameta.allure:allure-junit5"
+    testImplementation platform("io.qameta.allure:allure-bom:2.26.0")
+}
+
+tasks.withType(JavaCompile) {
+    options.encoding = 'UTF-8'
+}
+
+test {
+    ignoreFailures = true
+    useJUnitPlatform {
+        if (System.getProperty('includeTags') != null) {
+            includeTags System.getProperty('includeTags')
+        }
+    }
+    systemProperty "allure.results.directory", "target/allure-results"
+    jvmArgs = [ "-javaagent:${configurations.agent.singleFile}" ]
+    testLogging.showStandardStreams = true
+    reports.junitXml.required = false
+}
