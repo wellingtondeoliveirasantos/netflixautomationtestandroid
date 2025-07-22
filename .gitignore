@@ -1,5 +1,53 @@
-# Ignore Gradle project-specific cache directory
-.gradle
+# Diretórios de build e cache
+.gradle/
+build/
+out/
+logs/
 
-# Ignore Gradle build output directory
-build
+# IntelliJ IDEA
+.idea/
+*.iml
+*.iws
+
+# Eclipse
+.project
+.classpath
+.settings/
+
+# Android
+*.apk
+*.ap_
+*.dex
+*.class
+*.log
+*.keystore
+captures/
+.externalNativeBuild/
+.cxx/
+local.properties
+
+# Arquivos temporários do sistema
+*.tmp
+*.temp
+*.swp
+*.DS_Store
+Thumbs.db
+
+# Relatórios de testes
+/allure-report/
+/allure-results/
+/test-output/
+
+# Arquivos de execução
+*.pid
+
+# Arquivos do Appium (gerados automaticamente)
+appium.log
+node_modules/
+
+# Configurações pessoais
+*.env
+*.local
+
+# Arquivos específicos do projeto
+src/test/resources/app/*.apk
