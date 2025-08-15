@@ -178,13 +178,7 @@ adb devices
 
 ---
 
-## Execução dos Testes
 
-```bash
-./gradlew clean test
-```
-
----
 
 ## Configuração do Driver - `InitConfig`
 
@@ -192,6 +186,22 @@ Classe responsável por carregar configurações, montar capabilities e criar a 
 
 ---
 
+## Configuração do Driver - `InitConfigSaucelabs`
+
+Classe responsável por carregar configurações, montar capabilities e criar a instância no devicefarm Saucelabs.
+
+---
+## Execução dos Testes
+
+```bash
+./gradlew clean test -Dexecution.mode=local
+```
+
+```bash
+./gradlew clean test -Dexecution.mode=sauce
+```
+
+---
 ## Exemplo de Teste
 
 ```java

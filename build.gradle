@@ -55,6 +55,7 @@ test {
         }
     }
     systemProperty "allure.results.directory", "target/allure-results"
+    systemProperties System.getProperties()
     jvmArgs = [ "-javaagent:${configurations.agent.singleFile}" ]
     testLogging.showStandardStreams = true
     reports.junitXml.required = false
